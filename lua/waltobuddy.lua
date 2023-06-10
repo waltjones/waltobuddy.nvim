@@ -1,13 +1,18 @@
--- Name:         Snazzybuddy
+-- Name:         Waltobuddy
 -- Description:  Light and dark theme inspired by hyper-snazzy
 -- Author:       bbenzikry
 -- Maintainer:   bbenzikry
--- Website:      https://github.com/bbenzikry/snazzybuddy.nvim
+-- Website:      https://github.com/waltjones/waltobuddy.nvim
 -- License:      MIT
+local dlog = require("dlog")
+local logger = dlog("walto_logger")
+local debuglog = require("debuglog")
+debuglog.enable("walto_logger")
+
 local Color, colors, Group, groups, styles = require('colorbuddy').setup()
-local g = require('colorbuddy.group').groups
-local c = require('colorbuddy.color').colors
-local s = require('colorbuddy.style').styles
+local g = groups
+local c = colors
+local s = styles
 local b = s.bold
 local i = s.italic
 local uc = s.undercurl
@@ -21,6 +26,14 @@ local COLORS = {
     dark = {
         bg = '#282a36',
         fg = '#eff0eb',
+        grey12 = '#202020',
+        grey24 = '#404040',
+        grey36 = '#606060',
+        grey48 = '#808080',
+        grey60 = '#a0a0a0',
+        grey72 = '#c0c0c0',
+        grey84 = '#e0e0e0',
+        grey96 = '#f0f0f0',
         red = '#ff5c57',
         yellow = '#f3f99d',
         green = '#5af78e',
@@ -34,15 +47,23 @@ local COLORS = {
     light = {
         bg = '#eff0eb',
         fg = '#282a36',
-        red = '#ff5c57',
+        grey12 = '#202020',
+        grey24 = '#404040',
+        grey36 = '#606060',
+        grey48 = '#808080',
+        grey60 = '#a0a0a0',
+        grey72 = '#c0c0c0',
+        grey84 = '#e0e0e0',
+        grey96 = '#f0f0f0',
+        red = '#A81B08',
         yellow = '#CF9C00',
-        green = '#2DAE58',
-        blue = '#09A1ED',
+        green = '#407A27',
+        blue = '#264BB3',
         cyan = '#13BBB7',
-        purple = '#F767BB',
-        orange = '#F76D47',
-        brown = '#C17E70',
-        pink = '#FF5370'
+        purple = '#692D8A',
+        orange = '#BD5217',
+        brown = '#853D28',
+        pink = '#A80871'
     }
 }
 
@@ -50,7 +71,7 @@ local get_current_mode = function()
     if vim.g.background == 'dark' or vim.g.background == 'light' then
         return vim.g.background
     else
-        return 'dark'
+        return 'light'
     end
 end
 
@@ -61,7 +82,7 @@ local get_color = function(color_name, mode)
         if default_mode == 'light' or default_mode == 'dark' then
             selected_mode = default_mode
         else
-            default_mode = 'dark'
+            default_mode = 'light'
         end
     end
     return COLORS[selected_mode][color_name]
@@ -72,19 +93,26 @@ end
 
 local M = {}
 function M.load()
-    vim.g.colors_name = 'snazzybuddy'
+    vim.g.colors_name = 'waltobuddy'
     local current_mode = get_current_mode()
     -- Universal colors
     Color.new('fg1', get_color('fg'))
     Color.new('fg2', get_color('fg'))
     Color.new('fg3', '#e2e4e5')
     Color.new('disabled', '#464B5D')
-    Color.new('line_numbers', '#525975')
     Color.new('selection', '#464B5D')
 
     Color.new('white', '#eff0eb')
     Color.new('gray', '#5e6c70')
     Color.new('black', '#000000')
+    Color.new('grey12', get_color('grey12'))
+    Color.new('grey24', get_color('grey24'))
+    Color.new('grey36', get_color('grey36'))
+    Color.new('grey48', get_color('grey48'))
+    Color.new('grey60', get_color('grey60'))
+    Color.new('grey72', get_color('grey72'))
+    Color.new('grey84', get_color('grey84'))
+    Color.new('grey96', get_color('grey96'))
     Color.new('red', get_color('red'))
     Color.new('green', get_color('green'))
     Color.new('yellow', get_color('yellow'))
@@ -94,7 +122,6 @@ function M.load()
     Color.new('purple', get_color('purple'))
     Color.new('orange', get_color('orange'))
     Color.new('brown', get_color('brown'))
-    Color.new('comments', '#78787e')
     Color.new('error', get_color('red'))
     Color.new('pink', get_color('pink'))
     Color.new('incsearch', get_color('yellow'))
@@ -136,11 +163,12 @@ function M.load()
     if current_mode == 'dark' then
         -- Dark theme specific styling
         Color.new('bg', get_color('bg'))
+        Color.new('bg1', get_color('bg'))
         Color.new('fg1', get_color('fg'))
-        Color.new('invisibles', '#65737E')
-        Color.new('comments', '#78787e')
+        Color.new('invisibles', get_color('grey60'))
+        Color.new('comments', get_color('grey72'))
         Color.new('guides', '#424242')
-        Color.new('line_numbers', '#606580')
+        Color.new('line_numbers', get_color('grey72'))
         -- Color.new('lsp_background', '#606580')
         Color.new('lsp_background', '#54555e')
         Color.new('line_highlight', '#171717')
@@ -160,16 +188,17 @@ function M.load()
         -- Group.new('Ignore', c.disabled, c.none, no) -- left blank, hidden
 
         -- Color.new('Repeat')
-    elseif current_mode == 'light' then
+    else --if current_mode == 'light' then
         -- Light theme specific styling
-        Color.new('bg', get_color('bg', 'light'))
-        Color.new('fg1', get_color('fg', 'light'))
-        Color.new('invisibles', '#E7EAEC')
-        Color.new('comments', '#90A4AE')
+        Color.new('bg', get_color('bg'))
+        Color.new('bg1', get_color('bg'))
+        Color.new('fg1', get_color('fg'))
+        Color.new('invisibles', get_color('grey60'))
+        Color.new('comments', get_color('grey24'))
         Color.new('caret', '#272727')
         Color.new('selection', '#c2efd1')
         Color.new('guides', '#B0BEC5')
-        Color.new('line_numbers', '#686968')
+        Color.new('line_numbers', get_color('grey36'))
         -- Color.new('lsp_background', '#b5e5fc')
         Color.new('lsp_background', '#e2e3e9')
         Color.new('line_highlight', '#ECF0F1')
@@ -188,7 +217,7 @@ function M.load()
         Color.new('Operator', get_color('fg'))
         Color.new('Number', get_color('green'))
         Color.new('Conditional', get_color('purple'))
-        Color.new('String', get_color('yellow'))
+        Color.new('String', get_color('green'))
         Color.new('TSVariable', get_color('fg'))
         Color.new('TSField', get_color('fg'))
         Color.new('TSProperty', get_color('fg'))
@@ -240,9 +269,9 @@ function M.load()
 
     -- Highlight groups
 
-    Group.new('ColorColumn', c.fg3, c.bg, no) --  used for the columns set with 'colorcolumn'
-    Group.new('Conceal', c.blue, c.bg, no) -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Group.new('Cursor', c.bg, c.fg1, b + r) -- the character under the cursor
+    Group.new('ColorColumn', c.fg3, c.bg1, no) --  used for the columns set with 'colorcolumn'
+    Group.new('Conceal', c.blue, c.bg1, no) -- placeholder characters substituted for concealed text (see 'conceallevel')
+    Group.new('Cursor', c.bg1, c.fg1, b + r) -- the character under the cursor
     Group.new('CursorIM', c.fg1, c.none, r) -- like Cursor, but used when in IME mode
     -- Group.new('InvisibleCursor', c.red, c.red, b) -- like Cursor, but used when in IME mode
     Group.new('Directory', c.blue, c.none, b) -- directory names (and other special names in listings)
@@ -251,9 +280,9 @@ function M.load()
     Group.new('DiffDelete', c.red, c.none, no) -- diff mode: Deleted line
     Group.new('DiffText', c.blue, c.none, no) -- diff mode: Changed text within a changed line
     Group.new('EndOfBuffer', c.invisibles, c.none, no) -- filler lines (~) after the last line in the buffer
-    Group.new('ErrorMsg', c.fg1, c.bg, no) -- error messages on the command line
+    Group.new('ErrorMsg', c.fg1, c.bg1, no) -- error messages on the command line
     Group.new('VertSplit', c.selection, c.none, no) -- the column separating verti-- cally split windows
-    Group.new('Folded', c.purple, c.bg, i) -- line used for closed folds
+    Group.new('Folded', c.purple, c.bg1, i) -- line used for closed folds
     Group.new('FoldColumn', c.blue, c.none, no) -- 'foldcolumn'
     Group.new('SignColumn', c.fg1, c.none, no) -- column where signs are displayed
     Group.new('IncSearch', c.selection, c.incsearch, r + b) -- 'incsearch' highlighting; also used for the text replaced with ':s///c'
@@ -263,26 +292,27 @@ function M.load()
     Group.new('ModeMsg', c.green, c.none, no) -- 'showmode' message (e.g., '-- INSERT --')
     Group.new('MoreMsg', g.ModeMsg, g.ModeMsg, g.ModeMsg) -- more-prompt
     Group.new('NonText', c.fg1, c.none, no) -- '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., '>' displayed when a double-wide character doesn't fit at the end of the line).
-    Group.new('Normal', c.fg1, c.bg, no) -- normal text
+    logger("Background color: %s", c.bg1)
+    Group.new('Normal', c.fg1, c.bg1, no) -- normal text
     Group.new('Pmenu', c.fg1, c.selection, no) -- Popup menu: normal item.
     Group.new('PmenuSel', c.accent, c.disabled, no) -- Popup menu: selected item.
-    Group.new('PmenuSbar', c.fg1, c.bg, no) -- Popup menu: scrollbar.
+    Group.new('PmenuSbar', c.fg1, c.bg1, no) -- Popup menu: scrollbar.
     Group.new('PmenuThumb', c.fg1, c.accent, no) -- Popup menu: Thumb of the scrollbar.
     Group.new('Question', c.blue, c.none, b) -- hit-enter prompt and yes/no questions
+    Group.new('Search', c.selection, c.search, r + b) -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     Group.new('QuickFixLine', g.Search, g.Search, g.Search) -- Current quickfix item in the quickfix window.
     Group.new('qfLineNr', g.Type, g.Type, g.Type)
-    Group.new('Search', c.selection, c.search, r + b) -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     Group.new('SpecialKey', c.purple, c.none, no) -- Meta and special keys listed with ':map', also for text used to show unprintable characters in the text, 'listchars'. Generally: text that is displayed differently from what it really is.
     Group.new('SpellBad', c.red, c.none, i + uc) -- Word that is not recognized by the spellchecker. This will be combined with the highlighting used otherwise.
     Group.new('SpellCap', c.blue, c.none, i + uc) -- Word that should start with a capital. This will be combined with the highlighting used otherwise.
     Group.new('SpellLocal', c.cyan, c.none, i + uc) -- Word that is recognized by the spellchecker as one that is used in another region. This will be combined with the highlighting used otherwise.
     Group.new('SpellRare', c.purple, c.none, i + uc) -- Word that is recognized by the spellchecker as one that is hardly ever used. spell This will be combined with the highlighting used otherwise.
-    Group.new('StatusLine', c.fg1, c.bg, no) -- status line of current window
+    Group.new('StatusLine', c.fg1, c.bg1, no) -- status line of current window
     Group.new('StatusLineNC', c.comments, c.selection, no) -- status lines of not-current windows Note: if this is equal to 'StatusLine' Vim will use '^^^' in the status line of the current window.
     -- Group.new('StatusLineTerm', g.StatusLine, g.StatusLine, g.StatusLine) -- status line of current :terminal window
-    Group.new('StatusLineTerm', c.bg, c.green, g.StatusLine) -- status line of current :terminal window
+    Group.new('StatusLineTerm', c.bg1, c.green, g.StatusLine) -- status line of current :terminal window
     Group.new('StatusLineTermNC', g.StatusLineNC, g.StatusLineNC, g.StatusLineNC) -- status line of non-current :terminal window
-    Group.new('TabLineFill', c.fg1, c.bg, no)
+    Group.new('TabLineFill', c.fg1, c.bg1, no)
     Group.new('TabLineSel', c.green, c.accent, no)
     Group.new('TabLine', g.TabLineFill, g.TabLineFill, g.TabLineFill)
     Group.new('Title', c.blue, c.none, b) -- titles for output from ':set all', ':autocmd' etc.
@@ -293,7 +323,7 @@ function M.load()
     Group.new('CursorColumn', c.none, c.selection, no) -- Current cursor column highlight
     Group.new('CursorLine', c.none, c.selection, no) -- Current cursor line highlight
     Group.new('ToolbarLine', c.fg1, c.disabled, no)
-    Group.new('ToolbarButton', c.fg1, c.bg, b)
+    Group.new('ToolbarButton', c.fg1, c.bg1, b)
     Group.new('NormalMode', c.accent, c.none, r)
     Group.new('InsertMode', c.green, c.none, r)
     Group.new('ReplaceMode', c.red, c.none, r)
@@ -303,6 +333,21 @@ function M.load()
 
     -- Language-specific highlighting
 
+    -- Vim
+    Group.new('vimCommentTitle', c.blue, c.none, b)
+    Group.new('vimNotation', c.orange, c.none, no)
+    Group.new('vimBracket', c.orange, c.none, no)
+    Group.new('vimMapModKey', c.orange, c.none, no)
+    Group.new('vimCommand', c.accent, c.none, b)
+    Group.new('vimLet', c.blue, c.none, no)
+    Group.new('vimNorm', c.blue, c.none, no)
+    Group.new('vimFuncSID', g.Function, g.Function, g.Function)
+    Group.new('vimFunction', g.Function, g.Function, g.Function)
+    Group.new('vimGroup', c.blue, c.none, no)
+    Group.new('vimHiGroup', g.Type, g.Type, g.Type)
+    Group.new('vimSetSep', c.fg3, c.none, no)
+    Group.new('vimSep', c.fg3, c.none, no)
+    Group.new('vimContinue', c.yellow, c.none, no)
     -- C
     Group.new('cOperator', c.cyan, c.none, no)
     Group.new('cStructure', c.yellow, c.none, no)
@@ -414,7 +459,7 @@ function M.load()
     Group.new('haskellString', c.green, c.none, no)
     Group.new('haskellChar', c.green, c.none, no)
 
-    -- C# 
+    -- C#
     Group.new('csClass', c.yellow, c.none, no)
     Group.new('csAttribute', c.yellow, c.none, no)
     Group.new('csModifier', c.purple, c.none, no)
@@ -682,21 +727,6 @@ function M.load()
     Group.new('xmlAttribPunct', c.gray, c.none, no)
     Group.new('xmlEntity', c.orange, c.none, no)
     Group.new('xmlEntityPunct', c.orange, c.none, no)
-    -- Vim
-    Group.new('vimCommentTitle', c.blue, c.none, b)
-    Group.new('vimNotation', c.orange, c.none, no)
-    Group.new('vimBracket', c.orange, c.none, no)
-    Group.new('vimMapModKey', c.orange, c.none, no)
-    Group.new('vimCommand', c.accent, c.none, b)
-    Group.new('vimLet', c.blue, c.none, no)
-    Group.new('vimNorm', c.blue, c.none, no)
-    Group.new('vimFuncSID', g.Function, g.Function, g.Function)
-    Group.new('vimFunction', g.Function, g.Function, g.Function)
-    Group.new('vimGroup', c.blue, c.none, no)
-    Group.new('vimHiGroup', g.Type, g.Type, g.Type)
-    Group.new('vimSetSep', c.fg3, c.none, no)
-    Group.new('vimSep', c.fg3, c.none, no)
-    Group.new('vimContinue', c.yellow, c.none, no)
 
     -- TODO: Cypher
     -- hi link cypherComment              Comment
@@ -734,10 +764,10 @@ function M.load()
 
     -- gitsigns (lewis6991/gitsigns.nvim)
     Group.new('GitSignsAdd', c.green, c.none, no)
-    Group.new('GitSignsAddNr', c.bg, c.green, no)
+    Group.new('GitSignsAddNr', c.bg1, c.green, no)
     Group.new('GitSignsAddLn', c.red, c.none, no)
     Group.new('GitSignsChange', c.orange, c.none, no)
-    Group.new('GitSignsChangeNr', c.bg, c.orange, no)
+    Group.new('GitSignsChangeNr', c.bg1, c.orange, no)
     Group.new('GitSignsChangeLn', c.orange, c.none, no)
     Group.new('GitSignsDelete', c.red, c.none, no)
     Group.new('GitSignsDeleteNr', c.fg1, c.red, no)
@@ -817,13 +847,31 @@ function M.load()
     Group.new('WhichKeyGroup', g.Identifier, g.Identifier, g.Identifier)
     Group.new('WhichKeyDesc', g.Operator, g.Operator, g.Operator)
 
-    -- NeoVim built in
+    Group.new('ScrollView', c.grey60, c.none, no)                    -- scrollbar
+    Group.new('ScrollViewConflictsTop', c.red, c.none, no)        -- top conflict signs
+    Group.new('ScrollViewConflictsMiddle', c.orange, c.none, no)     -- middle conflict signs
+    Group.new('ScrollViewConflictsBottom', c.red, c.none, no)     -- bottom conflict signs
+    Group.new('ScrollViewCursor', c.grey24, c.none, no)              -- cursor signs
+    Group.new('ScrollViewDiagnosticsError', c.red, c.none, no)    -- diagnostic error signs
+    Group.new('ScrollViewDiagnosticsHint', c.pink, c.none, no)     -- diagnostic hint signs
+    Group.new('ScrollViewDiagnosticsInfo', c.green, c.none, no)     -- diagnostic info signs
+    Group.new('ScrollViewDiagnosticsWarn', c.yellow, c.none, no)     -- diagnostic warn signs
+    Group.new('ScrollViewFolds', c.blue, c.none, no)               -- fold signs
+    Group.new('ScrollViewLocList', c.purple, c.none, no)             -- loclist signs
+    Group.new('ScrollViewMarks', c.blue, c.none, no)               -- mark signs
+    Group.new('ScrollViewQuickFix', c.blue, c.none, no)            -- quickfix signs
+    Group.new('ScrollViewRestricted', c.blue, c.none, no)          -- |scrollview-restricted| scrollbar
+    Group.new('ScrollViewSearch', c.green, c.none, no)              -- search signs
+    Group.new('ScrollViewSpell', c.orange, c.none, no)               -- spell signs
+    Group.new('ScrollViewTextWidth', c.orange, c.none, no)           -- textwidth signs
+
+  -- NeoVim built in
 
     -- +- Neovim Support -+
     Group.new('healthError', c.error, c.fg2)
-    Group.new('healthSuccess', c.green, c.bg)
-    Group.new('healthWarning', c.yellow, c.bg)
-    Group.new('TermCursorNC', c.fg1, c.bg)
+    Group.new('healthSuccess', c.green, c.bg1)
+    Group.new('healthWarning', c.yellow, c.bg1)
+    Group.new('TermCursorNC', c.fg1, c.bg1)
 
     -- LSP Groups ( see `:h lsp-highlight`)
     Group.new('LspDiagnosticsDefaultError', c.error, c.none) -- Base highlight for errors
@@ -848,11 +896,11 @@ function M.load()
     Group.new('LspFloatWinBorder', c.yellow, c.none)
     Group.new('LspSagaFinderSelection', c.green, c.none)
     -- Group.new('LspSagaLspFinderBorder', c.blue, c.none)
-    Group.new('LspSagaDocTruncateLine', c.bg, c.none)
-    Group.new('LspSagaShTruncateLine', c.bg, c.none)
+    Group.new('LspSagaDocTruncateLine', c.bg1, c.none)
+    Group.new('LspSagaShTruncateLine', c.bg1, c.none)
     Group.new('LspSagaCodeActionTitle', c.orange, c.none, b)
     -- Group.new('LspSagaCodeActionContent', c.green, c.none, b)
-    -- Group.new('LspSagaCodeActionTruncateLine', c.bg, c.none)
+    -- Group.new('LspSagaCodeActionTruncateLine', c.bg1, c.none)
     -- Group.new('LspSagaAutoPreview', c.orange, c.none)
     Group.new('LspSagaSignatureHelpBorder', c.green, c.none)
     Group.new('LspSagaDiagnosticBorder', c.purple, c.none)
@@ -862,7 +910,7 @@ function M.load()
     -- Lsp saga lightbulb
     Group.new('LspSagaLightBulb', c.yellow, c.none)
 
-    -- LSP specific groups 
+    -- LSP specific groups
     -- LSP Floating
     -- Group.new('LspDiagnosticsFloatingError', c.error, c.none)
     -- Group.new('LspDiagnosticsFloatingWarn', c.yellow, c.none)
@@ -943,8 +991,8 @@ function M.load()
     Group.new('TSStructure', g.Structure, c.none) -- This is left as an exercise for the reader.
     Group.new('TSInclude', g.Include, c.none) -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
     -- Group.new('TSAnnotation'         , c.blue_nuanced_bg , c.none) -- For C++/Dart attributes, annotations that can be attached to the code to denote some kind of meta information.
-    -- Group.new('TSText'             , c.fg              , c.bg           , b) -- For strings considered text in a markup language.
-    -- Group.new('TSStrong'             , c.fg              , c.bg           , b) -- For text to be represented with strong.
+    -- Group.new('TSText'             , c.fg              , c.bg1           , b) -- For strings considered text in a markup language.
+    -- Group.new('TSStrong'             , c.fg              , c.bg1           , b) -- For text to be represented with strong.
     -- Group.new('TSEmphasis'            , c.blue_alt          , c.none  , b) -- For text to be represented with emphasis.
     -- Group.new('TSUnderline'            , c.blue_alt          , c.none  , b) -- TSUnderline
     -- Group.new('TSTitle'              , c.cyan_nuanced    , c.none) -- Text that is part of a title.
@@ -973,7 +1021,7 @@ function M.load()
 end
 
 function M.icon_load()
-    if vim.g.colors_name == 'snazzybuddy' and vim.g.snazzybuddy_icons then
+    if vim.g.colors_name == 'waltobuddy' and vim.g.snazzybuddy_icons then
         require'snazzybuddy.icons'.setup(Group)
     end
 end
@@ -985,9 +1033,9 @@ end
 -- end
 
 function M.reload()
-    package.loaded.snazzybuddy = nil
+    package.loaded.waltobuddy = nil
     package.loaded.colorbuddy = nil
-    require('colorbuddy').colorscheme('snazzybuddy')
+    require('colorbuddy').colorscheme('waltobuddy')
 end
 
 M.load()
