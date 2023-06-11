@@ -42,11 +42,22 @@ local COLORS = {
         purple = '#ff6ac1',
         orange = '#ff9f43',
         brown = '#b2643c',
-        pink = '#FF5370'
+        pink = '#FF5370',
+
+        red_hi = '#F5A6A2',
+        yellow_hi = '#FAF5BB',
+        green_hi = '#B0EBAE',
+        blue_hi = '#A8BFEB',
+        cyan_hi = '#BFF0E6',
+        purple_hi = '#D5B0EB',
+        orange_hi = '#EBBA99',
+        brown_hi = '#E0B3A7',
+        pink_hi = '#F0B7DE'
     },
     light = {
         bg = '#eff0eb',
         fg = '#282a36',
+
         grey12 = '#202020',
         grey24 = '#404040',
         grey36 = '#606060',
@@ -55,6 +66,8 @@ local COLORS = {
         grey72 = '#c0c0c0',
         grey84 = '#e0e0e0',
         grey96 = '#f0f0f0',
+
+        error = '#CC351B',
         red = '#A81B08',
         yellow = '#CF9C00',
         green = '#407A27',
@@ -63,7 +76,17 @@ local COLORS = {
         purple = '#692D8A',
         orange = '#BD5217',
         brown = '#853D28',
-        pink = '#A80871'
+        pink = '#A80871',
+
+        red_hi = '#F5A6A2',
+        yellow_hi = '#FAF5BB',
+        green_hi = '#B0EBAE',
+        blue_hi = '#A8BFEB',
+        cyan_hi = '#BFF0E6',
+        purple_hi = '#D5B0EB',
+        orange_hi = '#EBBA99',
+        brown_hi = '#E0B3A7',
+        pink_hi = '#F0B7DE'
     }
 }
 
@@ -123,6 +146,16 @@ function M.load()
     Color.new('orange', get_color('orange'))
     Color.new('brown', get_color('brown'))
     Color.new('error', get_color('red'))
+    Color.new('pink', get_color('pink'))
+    Color.new('red_hi', get_color('red_hi'))
+    Color.new('green_hi', get_color('green_hi'))
+    Color.new('yellow_hi', get_color('yellow_hi'))
+    Color.new('blue_hi', get_color('blue_hi'))
+    Color.new('cyan_hi', get_color('cyan_hi'))
+    Color.new('purple_hi', get_color('purple_hi'))
+    Color.new('orange_hi', get_color('orange_hi'))
+    Color.new('brown_hi', get_color('brown_hi'))
+    Color.new('error', get_color('error'))
     Color.new('pink', get_color('pink'))
     Color.new('incsearch', get_color('yellow'))
     Color.new('search', get_color('yellow'))
@@ -595,10 +628,10 @@ function M.load()
     Group.new('jsStorageClass', c.blue, c.none, no)
     Group.new('jsxRegion', c.blue, c.none, no)
     -- JSON
-    Group.new('jsonKeyword', c.green, c.none, no)
-    Group.new('jsonQuote', c.green, c.none, no)
+    Group.new('jsonKeyword', c.blue, c.none, no)
+    Group.new('jsonQuote', c.blue, c.none, no)
     Group.new('jsonBraces', c.fg1, c.none, no)
-    Group.new('jsonString', c.fg1, c.none, no)
+    Group.new('jsonString', c.green, c.none, no)
     -- Lua
     Group.new('luaIn', c.purple, c.none, no)
     Group.new('luaFunction', c.purple, c.none, no)
@@ -792,10 +825,10 @@ function M.load()
     Group.new('gitcommitDiscardedFile', c.red, c.none, no)
 
     -- Gitgutter (airblade/vim-gitgutter)
-    Group.new('GitGutterAdd', c.green, c.none, b)
-    Group.new('GitGutterChange', c.yellow, c.none, b)
-    Group.new('GitGutterDelete', c.red, c.none, b)
-    Group.new('GitGutterChangeDelete', c.purple, c.none, b)
+    Group.new('GitGutterAdd', c.green, c.green_hi, b)
+    Group.new('GitGutterChange', c.yellow, c.yellow_hi, b)
+    Group.new('GitGutterDelete', c.red, c.red_hi, b)
+    Group.new('GitGutterChangeDelete', c.purple, c.purple_hi, b)
     -- Git Messenger (rhysd/git-messenger.vim)
     Group.new('gitmessengerPopupNormal', g.CursorLine, g.CursorLine, g.CursorLine) -- Normal color in popup window
     Group.new('gitmessengerHeader', g.CursorLine, g.CursorLine, g.CursorLine) -- Header such as 'Commit:', 'Author:'
@@ -851,7 +884,7 @@ function M.load()
     Group.new('ScrollViewConflictsTop', c.red, c.none, no)        -- top conflict signs
     Group.new('ScrollViewConflictsMiddle', c.orange, c.none, no)     -- middle conflict signs
     Group.new('ScrollViewConflictsBottom', c.red, c.none, no)     -- bottom conflict signs
-    Group.new('ScrollViewCursor', c.grey24, c.none, no)              -- cursor signs
+    Group.new('ScrollViewCursor', c.cyan, c.cyan_hi, no)              -- cursor signs
     Group.new('ScrollViewDiagnosticsError', c.red, c.none, no)    -- diagnostic error signs
     Group.new('ScrollViewDiagnosticsHint', c.pink, c.none, no)     -- diagnostic hint signs
     Group.new('ScrollViewDiagnosticsInfo', c.green, c.none, no)     -- diagnostic info signs
@@ -861,7 +894,7 @@ function M.load()
     Group.new('ScrollViewMarks', c.blue, c.none, no)               -- mark signs
     Group.new('ScrollViewQuickFix', c.blue, c.none, no)            -- quickfix signs
     Group.new('ScrollViewRestricted', c.blue, c.none, no)          -- |scrollview-restricted| scrollbar
-    Group.new('ScrollViewSearch', c.green, c.none, no)              -- search signs
+    Group.new('ScrollViewSearch', c.green, c.green_hi, no)              -- search signs
     Group.new('ScrollViewSpell', c.orange, c.none, no)               -- spell signs
     Group.new('ScrollViewTextWidth', c.orange, c.none, no)           -- textwidth signs
 
