@@ -44,6 +44,16 @@ local COLORS = {
         brown = '#b2643c',
         pink = '#FF5370',
 
+        red_dark = '#581004',
+        yellow_dark = '#7F6000',
+        green_dark = '#204018',
+        blue_dark = '#132661',
+        cyan_dark = '#0A6663',
+        purple_dark = '#351745',
+        orange_dark = '#67310A',
+        brown_dark = '#432014',
+        pink_dark = '#540438',
+
         red_hi = '#F5A6A2',
         yellow_hi = '#FAF5BB',
         green_hi = '#B0EBAE',
@@ -77,6 +87,16 @@ local COLORS = {
         orange = '#BD5217',
         brown = '#853D28',
         pink = '#A80871',
+
+        red_dark = '#581004',
+        yellow_dark = '#7F6000',
+        green_dark = '#204018',
+        blue_dark = '#132661',
+        cyan_dark = '#0A6663',
+        purple_dark = '#351745',
+        orange_dark = '#67310A',
+        brown_dark = '#432014',
+        pink_dark = '#540438',
 
         red_hi = '#F5A6A2',
         yellow_hi = '#FAF5BB',
@@ -147,6 +167,14 @@ function M.load()
     Color.new('brown', get_color('brown'))
     Color.new('error', get_color('red'))
     Color.new('pink', get_color('pink'))
+    Color.new('red_dark', get_color('red_dark'))
+    Color.new('green_dark', get_color('green_dark'))
+    Color.new('yellow_dark', get_color('yellow_dark'))
+    Color.new('blue_dark', get_color('blue_dark'))
+    Color.new('cyan_dark', get_color('cyan_dark'))
+    Color.new('purple_dark', get_color('purple_dark'))
+    Color.new('orange_dark', get_color('orange_dark'))
+    Color.new('brown_dark', get_color('brown_dark'))
     Color.new('red_hi', get_color('red_hi'))
     Color.new('green_hi', get_color('green_hi'))
     Color.new('yellow_hi', get_color('yellow_hi'))
@@ -157,32 +185,33 @@ function M.load()
     Color.new('brown_hi', get_color('brown_hi'))
     Color.new('error', get_color('error'))
     Color.new('pink', get_color('pink'))
+
     Color.new('incsearch', get_color('yellow'))
     Color.new('search', get_color('yellow'))
     Color.new('Constant', get_color('orange'))
     Color.new('String', get_color('green'))
-    Color.new('Character', get_color('red'))
-    Color.new('Boolean', get_color('orange'))
-    Color.new('Float', get_color('orange'))
-    Color.new('Identifier', get_color('red'))
-    Color.new('Function', get_color('blue'))
+    Color.new('Character', get_color('green'))
+    Color.new('Boolean', get_color('blue_dark'))
+    Color.new('Float', get_color('red_dark'))
+    Color.new('Identifier', get_color('cyan_dark'))
+    Color.new('Function', get_color('blue_dark'))
     Color.new('Statement', get_color('red'))
-    Color.new('Conditional', get_color('purple'))
+    Color.new('Conditional', get_color('brown'))
     Color.new('Repeat', get_color('yellow'))
     Color.new('Label', get_color('yellow'))
-    Color.new('Operator', get_color('yellow'))
-    Color.new('Number', get_color('green'))
-    Color.new('Keyword', get_color('purple'))
+    Color.new('Operator', get_color('brown'))
+    Color.new('Number', get_color('red_dark'))
+    Color.new('Keyword', get_color('blue'))
     Color.new('Exception', get_color('red'))
     Color.new('PreProc', get_color('yellow'))
     Color.new('Include', get_color('blue'))
-    Color.new('Define', get_color('purple'))
+    Color.new('Define', get_color('blue'))
     Color.new('Macro', get_color('red'))
     Color.new('PreCondit', get_color('purple'))
-    Color.new('Type', get_color('yellow'))
+    Color.new('Type', get_color('blue'))
     Color.new('StorageClass', get_color('yellow'))
     Color.new('Structure', get_color('purple'))
-    Color.new('Typedef', get_color('yellow'))
+    Color.new('Typedef', get_color('blue'))
     Color.new('Special', get_color('blue'))
     Color.new('SpecialChar', get_color('yellow'))
     Color.new('Tag', get_color('orange'))
@@ -190,74 +219,35 @@ function M.load()
     Color.new('SpecialComment', get_color('yellow'))
     Color.new('Debug', get_color('red'))
     Color.new('Underlined', get_color('blue'))
-    Color.new('Todo', get_color('yellow'))
-    -- Color.new('TSProperty', get_color('fg'))
-    -- Style specific colors
-    if current_mode == 'dark' then
-        -- Dark theme specific styling
-        Color.new('bg', get_color('bg'))
-        Color.new('bg1', get_color('bg'))
-        Color.new('fg1', get_color('fg'))
-        Color.new('invisibles', get_color('grey60'))
-        Color.new('comments', get_color('grey72'))
-        Color.new('guides', '#424242')
-        Color.new('line_numbers', get_color('grey72'))
-        -- Color.new('lsp_background', '#606580')
-        Color.new('lsp_background', '#54555e')
-        Color.new('line_highlight', '#171717')
-        Color.new('accent', get_color('yellow'))
-        Color.new('htmlBold', get_color('yellow'))
-        Color.new('url', get_color('red'))
-        Color.new('link', get_color('green'))
-        Color.new('heading', get_color('blue'))
-        Color.new('codeDelimiter', get_color('purple'))
-        Color.new('TSVariable', get_color('fg'))
-        Color.new('TSField', get_color('fg'))
-        Color.new('TSProperty', get_color('blue'))
-        Color.new('Boolean', get_color('purple'))
-        Color.new('TSParameter', get_color('fg'))
-        Color.new('TSKeywordOperator', get_color('yellow'))
+    Color.new('Todo', get_color('red_dark'))
 
-        -- Group.new('Ignore', c.disabled, c.none, no) -- left blank, hidden
+    Color.new('bg', get_color('bg'))
+    Color.new('bg1', get_color('bg'))
+    Color.new('fg1', get_color('fg'))
+    Color.new('invisibles', get_color('grey60'))
+    Color.new('comments', get_color('grey24'))
+    Color.new('caret', '#272727')
+    Color.new('selection', '#c2efd1')
+    Color.new('guides', '#B0BEC5')
+    Color.new('line_numbers', get_color('grey36'))
+    -- Color.new('lsp_background', '#b5e5fc')
+    Color.new('lsp_background', '#e2e3e9')
+    Color.new('line_highlight', '#ECF0F1')
+    Color.new('accent', get_color('cyan'))
+    Color.new('incsearch', get_color('purple'))
+    Color.new('search', get_color('purple'))
+    Color.new('htmlBold', get_color('cyan'))
+    Color.new('url', get_color('yellow'))
+    Color.new('link', get_color('blue'))
+    Color.new('heading', get_color('green'))
+    Color.new('codeDelimiter', '#78787e')
 
-        -- Color.new('Repeat')
-    else --if current_mode == 'light' then
-        -- Light theme specific styling
-        Color.new('bg', get_color('bg'))
-        Color.new('bg1', get_color('bg'))
-        Color.new('fg1', get_color('fg'))
-        Color.new('invisibles', get_color('grey60'))
-        Color.new('comments', get_color('grey24'))
-        Color.new('caret', '#272727')
-        Color.new('selection', '#c2efd1')
-        Color.new('guides', '#B0BEC5')
-        Color.new('line_numbers', get_color('grey36'))
-        -- Color.new('lsp_background', '#b5e5fc')
-        Color.new('lsp_background', '#e2e3e9')
-        Color.new('line_highlight', '#ECF0F1')
-        Color.new('accent', get_color('cyan'))
-        Color.new('incsearch', get_color('purple'))
-        Color.new('search', get_color('purple'))
-        Color.new('htmlBold', get_color('cyan'))
-        Color.new('url', get_color('yellow'))
-        Color.new('link', get_color('blue'))
-        Color.new('heading', get_color('green'))
-        Color.new('codeDelimiter', '#78787e')
-        Color.new('Function', get_color('blue'))
-        -- Color.new('Type', get_color('yellow', 'light'))
+    Color.new('TSVariable', get_color('blue'))
+    Color.new('TSField', get_color('fg'))
+    Color.new('TSProperty', get_color('fg'))
+    Color.new('TSParameter', get_color('fg'))
+    Color.new('TSKeywordOperator', get_color('purple'))
 
-        -- Color.new('Statement', get_color('red', 'light'))
-        Color.new('Operator', get_color('fg'))
-        Color.new('Number', get_color('green'))
-        Color.new('Conditional', get_color('purple'))
-        Color.new('String', get_color('green'))
-        Color.new('TSVariable', get_color('fg'))
-        Color.new('TSField', get_color('fg'))
-        Color.new('TSProperty', get_color('fg'))
-        Color.new('TSParameter', get_color('fg'))
-        Color.new('TSKeywordOperator', get_color('purple'))
-
-    end
     -- Choose italic comments
     if vim.g.snazzybuddy_italics == 1 then
         Group.new('Comment', c.comments, c.none, i) -- italic comments
@@ -266,7 +256,7 @@ function M.load()
     end
 
     Group.new('Constant', c.Constant, c.none, no) -- any constant
-    Group.new('String', c.String, c.none, i) -- this is a string
+    Group.new('String', c.String, c.none, no) -- this is a string
     Group.new('Character', c.Character, c.none, no) -- a character constant: 'c', '\n'
     Group.new('Boolean', c.Boolean, c.none, no) -- a boolean constant: TRUE, false
     Group.new('Number', c.Number, c.none, no) -- a boolean constant: TRUE, false
@@ -771,6 +761,17 @@ function M.load()
     -- hi link cypherVariable             Identifier
 
     -- Plugin highlight
+    -- Ale
+    Group.new('ALEVirtualTextError', c.red_hi, c.none, no)
+    Group.new('ALEVirtualTextWarning', c.orange_hi, c.none, no)
+    Group.new('ALEVirtualTextInfo', c.green_hi, c.none, no)
+    Group.new('ALEError', c.none, c.none, ul)
+    Group.new('ALEErrorSign', c.red, c.none, no)
+    Group.new('ALEWarning', c.none, c.none, ul)
+    Group.new('ALEWarningSign', c.yellow, c.none, no)
+    Group.new('ALEInfo', c.none, c.none, ul)
+    Group.new('ALEInfoSign', c.green, c.none, no)
+
     -- Telescope
     local telescope_selection = current_mode == 'dark' and c.purple or c.yellow
     Group.new('TelescopeSelection', telescope_selection, c.none, b) -- selected item
@@ -988,14 +989,14 @@ function M.load()
     Group.new('SnazzyIndent7', c.brown, nil)
 
     Group.new('TSError', c.error, c.none, b) -- For syntax/parser errors
-    Group.new('TSPunctDelimiter', g.Delimiter, c.none) -- For delimiters ie: `.
-    Group.new('TSPunctBracket', c.fg3, nil) -- For brackets and parens
+    Group.new('TSPunctDelimiter', g.Delimiter, c.none, no) -- For delimiters ie: `.
+    Group.new('TSPunctBracket', c.purple, c.none, no) -- For brackets and parens
     -- Group.new('TSPunctSpecial'       , c.fg     , nil) -- For special punctutation that does not fall in the catagories before
     Group.new('TSConstant', g.Constant, c.none) -- For constants
     Group.new('TSConstBuiltin', g.Constant, c.none) -- For constant that are built in the language: `nil` in Lua
     Group.new('TSConstMacro', g.Constant, c.none) -- For constants that are defined by macros: `NULL` in C
     Group.new('TSString', g.String, c.none) -- For strings
-    Group.new('TSStringRegex', c.red, nil) -- For regexes
+    Group.new('TSStringRegex', c.red_dark, nil) -- For regexes
     Group.new('TSStringEscape', c.red, nil) -- For escape characters within a string
     Group.new('TSCharacter', g.Character, c.none) -- For characters
     Group.new('TSNumber', g.Number, c.none) -- For integers
@@ -1032,7 +1033,7 @@ function M.load()
     -- Group.new('TSLiteral'            , c.blue_alt          , c.none  , b) -- Literal text.
     -- Group.new('TSURI'           , c.cyan              , c.none  , s.none) -- Any URI like a link or email.
     Group.new('TSVariable', c.TSVariable, c.none, s.none) -- Any URI like a link or email.
-    -- Group.new('TSVariableBuiltin' , g.magenta_alt_other     , nil) -- Variable names that are defined by the languages, like `this` or `self`.
+    Group.new('TSVariableBuiltin', c.blue, c.none, no) -- Variable names that are defined by the languages, like `this` or `self`.
 
     -- Mail highlighting
     Group.new("mailQuoted1", c.yellow, c.none, no)
