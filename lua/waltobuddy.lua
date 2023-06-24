@@ -296,13 +296,13 @@ function M.load()
     Group.new('SpecialComment', c.SpecialComment, c.none, no) -- special things inside a comment
     Group.new('Debug', c.Debug, c.none, no) -- debugging statements
     Group.new('Underlined', c.Underlined, c.none, ul) -- text that stands out, HTML links
-    Group.new('Ignore', c.disabled, c.none, no) -- left blank, hidden
+    Group.new('Ignore', c.grey72, c.none, no) -- left blank, hidden
     Group.new('Error', c.error, c.none) -- any erroneous construct, also -- see: https://github.com/neovim/neovim/issues/13746
     Group.new('Todo', c.Todo, c.none, b + i) -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
     -- Highlight groups
 
-    Group.new('ColorColumn', c.fg3, c.bg1, no) --  used for the columns set with 'colorcolumn'
+    Group.new('ColorColumn', c.none, c.grey84, no) --  used for the columns set with 'colorcolumn'
     Group.new('Conceal', c.blue, c.bg1, no) -- placeholder characters substituted for concealed text (see 'conceallevel')
     Group.new('Cursor', c.bg1, c.fg1, b + r) -- the character under the cursor
     Group.new('CursorIM', c.fg1, c.none, r) -- like Cursor, but used when in IME mode
@@ -324,7 +324,7 @@ function M.load()
     Group.new('MatchParen', c.cyan, c.none, b) -- The character under the cursor or just before it, if it is a paired bracket, and its match.
     Group.new('ModeMsg', c.green, c.none, no) -- 'showmode' message (e.g., '-- INSERT --')
     Group.new('MoreMsg', g.ModeMsg, g.ModeMsg, g.ModeMsg) -- more-prompt
-    Group.new('NonText', c.fg1, c.none, no) -- '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., '>' displayed when a double-wide character doesn't fit at the end of the line).
+    Group.new('NonText', c.grey72, c.none, no) -- '~' and '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., '>' displayed when a double-wide character doesn't fit at the end of the line).
     logger("Background color: %s", c.bg1)
     Group.new('Normal', c.fg1, c.bg1, no) -- normal text
     Group.new('Pmenu', c.fg1, c.selection, no) -- Popup menu: normal item.
