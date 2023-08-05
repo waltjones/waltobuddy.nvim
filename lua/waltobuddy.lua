@@ -310,7 +310,7 @@ function M.load()
     Group.new('SignColumn', c.fg1, c.none, no) -- column where signs are displayed
     Group.new('IncSearch', c.selection, c.incsearch, r + b) -- 'incsearch' highlighting; also used for the text replaced with ':s///c'
     Group.new('LineNr', c.line_numbers, c.none, no) -- Line number for ':number' and ':#' commands, and when 'number' or 'relativenumber' option is set.
-    Group.new('CursorLineNr', c.accent, c.none, no) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    Group.new('CursorLineNr', c.accent, c.none, b) -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     Group.new('MatchParen', c.cyan, c.none, b) -- The character under the cursor or just before it, if it is a paired bracket, and its match.
     Group.new('ModeMsg', c.green, c.none, no) -- 'showmode' message (e.g., '-- INSERT --')
     Group.new('MoreMsg', g.ModeMsg, g.ModeMsg, g.ModeMsg) -- more-prompt
@@ -826,10 +826,15 @@ function M.load()
     Group.new('gitcommitDiscardedFile', c.red, c.none, no)
 
     -- Gitgutter (airblade/vim-gitgutter)
-    Group.new('GitGutterAdd', c.green, c.green_hi, b)
-    Group.new('GitGutterChange', c.yellow, c.yellow_hi, b)
-    Group.new('GitGutterDelete', c.red, c.red_hi, b)
-    Group.new('GitGutterChangeDelete', c.purple, c.purple_hi, b)
+    Group.new('GitGutterAdd', c.green, c.none, b)
+    Group.new('GitGutterChange', c.yellow, c.none, b)
+    Group.new('GitGutterDelete', c.red, c.none, b)
+    Group.new('GitGutterChangeDelete', c.purple, c.none, b)
+    Group.new('GitGutterAddLineNr', c.green, c.none, no)
+    Group.new('GitGutterChangeLineNr', c.yellow, c.none, no)
+    Group.new('GitGutterDeleteLineNr', c.red, c.none, no)
+    Group.new('GitGutterChangeDeleteLineNr', c.purple, c.none, no)
+
     -- Git Messenger (rhysd/git-messenger.vim)
     Group.new('gitmessengerPopupNormal', g.CursorLine, g.CursorLine, g.CursorLine) -- Normal color in popup window
     Group.new('gitmessengerHeader', g.CursorLine, g.CursorLine, g.CursorLine) -- Header such as 'Commit:', 'Author:'
