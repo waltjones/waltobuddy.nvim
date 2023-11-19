@@ -65,28 +65,28 @@ local COLORS = {
         pink_hi = '#F0B7DE'
     },
     light = {
-        bg = '#eff0eb',
-        fg = '#282a36',
+        bg = '#FFFCF0',
+        fg = '#100F0F',
 
-        grey12 = '#202020',
-        grey24 = '#404040',
-        grey36 = '#606060',
-        grey48 = '#808080',
-        grey60 = '#a0a0a0',
-        grey72 = '#c0c0c0',
-        grey84 = '#e0e0e0',
-        grey96 = '#f0f0f0',
+        grey12 = '#282726',
+        grey24 = '#403E3C',
+        grey36 = '#575653',
+        grey48 = '#6F6E69',
+        grey60 = '#878580',
+        grey72 = '#B7B5AC',
+        grey84 = '#CECDC3',
+        grey96 = '#E6E4D9',
 
         error = '#CC351B',
-        red = '#A81B08',
-        yellow = '#CF9C00',
-        green = '#407A27',
-        blue = '#264BB3',
-        cyan = '#13BBB7',
-        purple = '#692D8A',
-        orange = '#BD5217',
-        brown = '#853D28',
-        pink = '#A80871',
+        red = '#AF3029',
+        yellow = '#AD8301',
+        green = '#66800B',
+        blue = '#205EA6',
+        cyan = '#24837B',
+        purple = '#5E409D',
+        orange = '#BC5215',
+        brown = '#a67b5b',
+        pink = '#A02F6F',
 
         red_dark = '#581004',
         yellow_dark = '#7F6000',
@@ -98,15 +98,15 @@ local COLORS = {
         brown_dark = '#432014',
         pink_dark = '#540438',
 
-        red_hi = '#F5A6A2',
-        yellow_hi = '#FAF5BB',
-        green_hi = '#B0EBAE',
-        blue_hi = '#A8BFEB',
-        cyan_hi = '#BFF0E6',
-        purple_hi = '#D5B0EB',
-        orange_hi = '#EBBA99',
-        brown_hi = '#E0B3A7',
-        pink_hi = '#F0B7DE'
+        red_hi = '#D14D41',
+        yellow_hi = '#D0A215',
+        green_hi = '#879A39',
+        blue_hi = '#4385BE',
+        cyan_hi = '#3AA99F',
+        purple_hi = '#8B7EC8',
+        orange_hi = '#DA702C',
+        brown_hi = '#f5deb3',
+        pink_hi = '#CE5D97'
     }
 }
 
@@ -189,8 +189,8 @@ function M.load()
     Color.new('incsearch', get_color('yellow'))
     Color.new('search', get_color('yellow'))
     Color.new('Constant', get_color('orange'))
-    Color.new('String', get_color('green'))
-    Color.new('Character', get_color('green'))
+    Color.new('String', get_color('green_dark'))
+    Color.new('Character', get_color('green_dark'))
     Color.new('Boolean', get_color('blue_dark'))
     Color.new('Float', get_color('red_dark'))
     Color.new('Identifier', get_color('cyan_dark'))
@@ -223,7 +223,8 @@ function M.load()
 
     Color.new('bg', get_color('bg'))
     Color.new('bg1', get_color('bg'))
-    Color.new('fg1', get_color('fg'))
+    Color.new('bg2', get_color('grey96'))
+    Color.new('fg1', get_color('grey12'))
     Color.new('invisibles', get_color('grey60'))
     Color.new('comments', get_color('grey24'))
     Color.new('caret', '#272727')
@@ -292,7 +293,7 @@ function M.load()
 
     -- Highlight groups
 
-    Group.new('ColorColumn', c.none, c.grey84, no) --  used for the columns set with 'colorcolumn'
+    Group.new('ColorColumn', c.none, c.grey96, no) --  used for the columns set with 'colorcolumn'
     Group.new('Conceal', c.blue, c.bg1, no) -- placeholder characters substituted for concealed text (see 'conceallevel')
     Group.new('Cursor', c.bg1, c.fg1, b + r) -- the character under the cursor
     Group.new('CursorIM', c.fg1, c.none, r) -- like Cursor, but used when in IME mode
@@ -335,10 +336,7 @@ function M.load()
     -- Group.new('StatusLineTerm', g.StatusLine, g.StatusLine, g.StatusLine) -- status line of current :terminal window
     Group.new('StatusLineTerm', c.bg1, c.green, g.StatusLine) -- status line of current :terminal window
     Group.new('StatusLineTermNC', g.StatusLineNC, g.StatusLineNC, g.StatusLineNC) -- status line of non-current :terminal window
-    Group.new('TabLineFill', c.fg1, c.bg1, no)
-    Group.new('TabLineSel', c.green, c.accent, no)
-    Group.new('TabLine', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('Title', c.blue, c.none, b) -- titles for output from ':set all', ':autocmd' etc.
+    Group.new('Title', c.green_dark, c.bg1, b) -- titles for output from ':set all', ':autocmd' etc.
     Group.new('Visual', c.none, c.selection, no) -- Visual mode selection
     Group.new('VisualNOS', g.Visual, g.Visual, g.Visual) -- Visual mode selection when vim is 'Not Owning the Selection'. Only X11 Gui's gui-x11 and xterm-clipboard supports this.
     Group.new('WarningMsg', c.red, c.none, no) --  warning messages
@@ -353,6 +351,31 @@ function M.load()
     Group.new('VisualMode', c.purple, c.none, r)
     Group.new('CommandMode', c.gray, c.none, r)
     Group.new('Warnings', c.orange, c.none, r)
+
+    Group.new('TabLineFill', c.brown_dark, c.brown_hi, no)
+    Group.new('TabLineSel', c.bg2, c.brown, no) -- tab numbers
+    Group.new('TabLine', c.brown_dark, c.brown_hi, no) -- unselected tabs
+    -- Groups:
+    -- 1. selected (w/red)   XTSelect XTSelectMod
+    -- 2. inactive (w/red)   XTVisible XTVisibleMod
+    -- 3. hidden (w/red)     XTHidden XTHiddenMod
+    -- 4. extra (w/red)      XTExtra  XTExtraMod
+    -- 5. special            XTSpecial
+    -- 6. number (selected)  XTNum XTNumSel
+    -- TODO: 7. warning            XTWarning
+    -- 8. fill               XTFill
+    Group.new('XTSelect', g.TabLineSel, g.TabLineSel, g.TabLineSel)
+    Group.new('XTSelectMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTVisible', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTVisibleMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTHidden', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTHiddenMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTExtra', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTExtraMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTSpecial', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTNum', c.brown_dark, c.brown_hi, g.TabLineFill)
+    Group.new('XTNumSel', c.bg2, c.brown, g.TabLineFill)
+    Group.new('XTFill', g.TabLineFill, g.TabLineFill, g.TabLineFill)
 
     -- Language-specific highlighting
 
