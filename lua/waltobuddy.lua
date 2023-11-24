@@ -352,9 +352,9 @@ function M.load()
     Group.new('CommandMode', c.gray, c.none, r)
     Group.new('Warnings', c.orange, c.none, r)
 
-    Group.new('TabLineFill', c.brown_dark, c.brown_hi, no)
-    Group.new('TabLineSel', c.bg2, c.brown, no) -- tab numbers
-    Group.new('TabLine', c.brown_dark, c.brown_hi, no) -- unselected tabs
+    Group.new('TabLineFill', c.blue_dark, c.blue_hi, no)
+    Group.new('TabLineSel', c.bg2, c.blue, no) -- tab numbers
+    Group.new('TabLine', c.blue_dark, c.bg2, no) -- unselected tabs
     -- Groups:
     -- 1. selected (w/red)   XTSelect XTSelectMod
     -- 2. inactive (w/red)   XTVisible XTVisibleMod
@@ -365,16 +365,16 @@ function M.load()
     -- TODO: 7. warning            XTWarning
     -- 8. fill               XTFill
     Group.new('XTSelect', g.TabLineSel, g.TabLineSel, g.TabLineSel)
-    Group.new('XTSelectMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
+    Group.new('XTSelectMod', g.TabLineSel, g.TabLineSel, g.TabLineSel)
     Group.new('XTVisible', g.TabLine, g.TabLine, g.TabLine)
-    Group.new('XTVisibleMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTHidden', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTHiddenMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTExtra', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTExtraMod', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTSpecial', g.TabLineFill, g.TabLineFill, g.TabLineFill)
-    Group.new('XTNum', c.brown_dark, c.brown_hi, g.TabLineFill)
-    Group.new('XTNumSel', c.bg2, c.brown, g.TabLineFill)
+    Group.new('XTVisibleMod', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTHidden', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTHiddenMod', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTExtra', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTExtraMod', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTSpecial', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTNum', g.TabLine, g.TabLine, g.TabLine)
+    Group.new('XTNumSel', g.TabLineSel, g.TabLineSel, g.TabLineFill)
     Group.new('XTFill', g.TabLineFill, g.TabLineFill, g.TabLineFill)
 
     -- Language-specific highlighting
