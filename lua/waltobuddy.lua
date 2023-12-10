@@ -353,8 +353,8 @@ function M.load()
     Group.new('Warnings', c.orange, c.none, r)
 
     Group.new('TabLineFill', c.blue_dark, c.blue_hi, no)
-    Group.new('TabLineSel', c.bg2, c.blue, no) -- tab numbers
-    Group.new('TabLine', c.blue_dark, c.bg2, no) -- unselected tabs
+    Group.new('TabLineSel', c.blue_dark, c.bg1, b) -- tab numbers
+    Group.new('TabLine', c.bg2, c.blue, no) -- unselected tabs
     -- Groups:
     -- 1. selected (w/red)   XTSelect XTSelectMod
     -- 2. inactive (w/red)   XTVisible XTVisibleMod
